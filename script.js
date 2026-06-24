@@ -21,9 +21,10 @@ const getAPOD = async (fecha = '') => {
         const res = await fetch(url);
         const data = await res.json();
         apodActual = data;
-        if (!res.ok) throw new Error(data) 
+        if (!res.ok) throw new Error(data.msg)  
+        renderizar(data)                         
     } catch (error) {
-        apodContenedor.innerHTML = `<p class="error">${"no se pudo cargar la información"}</p>`
+        apodContenedor.innerHTML = `<p class="error">No se pudo cargar la información</p>`
     }
 }
 
@@ -53,6 +54,7 @@ inputFecha.addEventListener('change', (e) => {
 })
 
 getAPOD()
+
 
 //FIN 1. Obtener y mostrar la "Foto del Día" (APOD) Daniel
 
