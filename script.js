@@ -5,12 +5,12 @@ const btnsFavoritos = document.querySelector('.btns-favoritos')
 btnsFavoritos.addEventListener('click', (event) => {
     const card = event.target.closest('.card');
 
-    const cardApod = {
-        titulo:
-        fecha:
-        imagen:
-        explicacion:
-    };
+    // const cardApod = {
+    //     titulo:
+    //     fecha:
+    //     imagen:
+    //     explicacion:
+    // };
 
     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
@@ -47,9 +47,10 @@ const getAPOD = async (fecha = '') => {
             : `https://api.nasa.gov/planetary/apod?api_key=MzkDqvkmLLMzqT46dmN7F1aULfaXcz2w65ZAniVS`
         const res = await fetch(url);
         const data = await res.json();
-        if (!res.ok) throw new Error(data) 
+        if (!res.ok) throw new Error(data.msg)  
+        renderizar(data)                         
     } catch (error) {
-        apodContenedor.innerHTML = `<p class="error">${"no se pudo cargar la información"}</p>`
+        apodContenedor.innerHTML = `<p class="error">No se pudo cargar la información</p>`
     }
 }
 
