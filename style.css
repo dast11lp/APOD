@@ -1,0 +1,114 @@
+body{
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #020617
+    );
+    color: white;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+.container{
+    max-width: 1100px;
+    margin: auto;
+}
+
+h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    color: #38bdf8;
+    text-shadow: 0 0 15px #38bdf8;
+}
+.search-section{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+input[type="date"]{
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+}
+button{
+     padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #0ea5e9;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+button:hover{
+    background: #0284c7;
+    transform: translateY(-2px);
+}
+#apod-container{
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+#apod-container img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+#apod-container video{
+    width:100%;
+    border-radius:10px;
+    margin: 15px 0;
+}
+#favoritesList li{
+    cursor: pointer;
+    margin: 10px 0;
+}
+#favoritesList li:hover{
+    color: blue;
+    text-decoration: underline;
+}
+h2{
+    margin-top: 30px;
+}
+#favoritesList{
+    list-style: none;
+    padding: 0;
+}
+#favoritesList li{
+
+    background: rgba(255,255,255,0.1);
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#favoritesList li:hover{
+
+    background: rgba(56,189,248,0.3);
+    transform: translateX(5px);
+}
+@media(max-width:768px){
+
+    .search-section{
+
+        flex-direction: column;
+
+    }
+
+    button{
+
+        width: 100%;
+
+    }
+
+}
