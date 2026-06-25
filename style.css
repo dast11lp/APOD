@@ -138,3 +138,22 @@ video {
 
 
 /* <!-- FIN 1. Obtener y mostrar la "Foto del Día" (APOD) Daniel--> */
+
+
+/* Button Sebastian */
+
+.contentedor-boton{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    margin-top: 10px;
+
+}
+
+#btn-favoritos{
+    background-color: #000;
+    color: white;
+    border: 1px solid #48e;
+    border-radius: 5px;
+    padding: 10px;
+}
