@@ -1,29 +1,29 @@
 ////////////////// Inicio Alejandro ///////////////////
 
-const btnsFavoritos = document.querySelector('.btns-favoritos')
+// const btnsFavoritos = document.querySelector('.btns-favoritos')
 
-btnsFavoritos.addEventListener('click', (event) => {
-    const card = event.target.closest('.card');
+// btnsFavoritos.addEventListener('click', (event) => {
+//     const card = event.target.closest('.card');
 
-    // const cardApod = {
-    //     titulo:
-    //     fecha:
-    //     imagen:
-    //     explicacion:
-    // };
+//     // const cardApod = {
+//     //     titulo:
+//     //     fecha:
+//     //     imagen:
+//     //     explicacion:
+//     // };
 
-    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+//     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
 
-    const existe = favoritos.some(fav = fav.id === cardApod.titulo);
+//     const existe = favoritos.some(fav = fav.id === cardApod.titulo);
 
-    if (!existe) {
-        favoritos.push(cardApod);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        alert('APOD agregado a favoritos');
-    } else {
-        alert('APOD ya está agregado en favoritos');
-    }
-})
+//     if (!existe) {
+//         favoritos.push(cardApod);
+//         localStorage.setItem('favoritos', JSON.stringify(favoritos));
+//         alert('APOD agregado a favoritos');
+//     } else {
+//         alert('APOD ya está agregado en favoritos');
+//     }
+// })
 //////////////////// Fin Alejandro ////////////////////
 
 let apodActual = null;
@@ -74,32 +74,41 @@ const renderizar = (data) => {
             </div>
         </div>
     `;
-
+    renderizarBtnGuardar();
 }
 
 inputFecha.addEventListener('change', (e) => {
     getAPOD(e.target.value)
 })
 
-getAPOD()
+getAPOD();
 
 //FIN 1. Obtener y mostrar la "Foto del Día" (APOD) Daniel
 
 
 // guardar favoritos sebastian
 
-let guardar = document.getElementById('btn-favoritos');
+
+const contenedorBtnGuardar = document.querySelector('.contentedor-boton');
+
+function renderizarBtnGuardar() {
+    contenedorBtnGuardar.innerHTML = `
+        <button type="button" id="btn-favoritos">Añadir a Favoritos</button>
+    `
+    const guardar = document.getElementById('btn-favoritos');
+    guardar.addEventListener("click", guardarFavorito);
+}
 
 function guardarFavorito() {
 
-    if (apodActual == null) {
+    if (apodActual === null) {
         alert("No hay nada que guardar");
         return;
     }
 
     let favoritos = localStorage.getItem("favoritos");
 
-    if (favoritos == null) {
+    if (favoritos === null) {
         favoritos = [];
     } else {
         favoritos = JSON.parse(favoritos);
@@ -125,7 +134,68 @@ function guardarFavorito() {
         JSON.stringify(favoritos)
     );
 
+    actualizarListaFavoritos();
+
     alert("Guardado en favoritos");
 }
 
-guardar.addEventListener("click", guardarFavorito);
+// guardar.addEventListener("click", guardarFavorito);
+
+
+// function mostrarFavoritos() {
+//     apodContenedor.innerHTML = '';
+
+//     if (favoritos.length === 0) {
+//         apodContenedor.innerHTML = '<p>Aún no tienes favoritos</p>';
+//         return;
+//     }
+
+//     favoritos.forEach(favorito) => {
+        
+//     }
+// }
+
+function actualizarListaFavoritos() {
+    let contenedor = document.getElementById('favoritos');
+
+    let apodGuardados = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+    contenedor.innerHTML = "";
+    
+    if (apodGuardados.length === 0) {
+        contenedor.innerHTML = `
+            <h2>
+                Todavía no tienes favoritos guardados.
+            </h2>
+        `;
+    }
+
+    apodGuardados.forEach(apod => {
+
+        const media = apod.media_type === 'video'
+        ? `
+        <video width="300" controls>
+            <source src="${apod.url}" type="video/mp4">
+        </video>
+        `
+        : `
+        <img src="${apod.url}" alt="${apod.title}">
+        `;
+
+        let tarjeta = document.createElement("div");
+
+        tarjeta.innerHTML = `
+            <div class="apod-contenedor tarjeta-apod">
+                <h2 class="titulo">${apod.title}</h2>
+                ${media}
+                <div class="explanation">
+                    <p>${apod.explanation}</p>
+                </div>
+            </div>
+        `
+
+        contenedor.appendChild(tarjeta);
+    })
+}
+
+actualizarListaFavoritos();

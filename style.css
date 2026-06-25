@@ -43,6 +43,12 @@ header p {
     letter-spacing: 0.08em;
 }
 
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .loading {
     display: block;
     text-align: center;
@@ -63,6 +69,25 @@ header p {
     overflow: hidden;
 }
 
+.titulo-fav {
+    font-family: Arial;
+    margin-top: 50px;
+    font-size: 30px;
+    width: fit-content;
+    box-shadow: 0 0 10px #FFF;
+}
+
+.tarjeta-apod {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto;
+    box-shadow: 0 0 10px #FFF;
+}
+
+.tarjeta-apod img {
+    width: 700px;
+}
 
 .titulo {
     font-family: 'Space Mono', monospace;
